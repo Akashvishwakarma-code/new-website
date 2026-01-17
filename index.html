@@ -569,294 +569,862 @@
     </section>
 
     <!-- News Section -->
-    <!-- ================= NEWS SECTION ================= -->
-
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+    <!-- ===== NEWS SECTION CSS ===== -->
 <style>
-/* ===== News ===== */
+/* ===============================
+   News Section Wrapper
+================================ */
 .news-section {
-  padding: 120px 0;
-  background: #f8f9fa;
+  padding-top: 120px;
+  background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
 }
 
+/* ===============================
+   News Filter
+================================ */
+.news-filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 30px 0 50px;
+}
+
+.filter-btn {
+  padding: 10px 24px;
+  border: 2px solid #0066b3;
+  background: white;
+  color: #0066b3;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+  background: #0066b3;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 102, 179, 0.25);
+}
+
+/* ===============================
+   News Grid
+================================ */
 .news-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 30px;
+  margin-bottom: 40px;
 }
 
+/* ===============================
+   News Card
+================================ */
 .news-card {
-  background: #fff;
+  background: white;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.news-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.news-img {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
 }
 
 .news-img img {
   width: 100%;
-  height: 220px;
+  height: 100%;
   object-fit: cover;
+  transition: transform 0.6s ease;
 }
 
+.news-card:hover .news-img img {
+  transform: scale(1.08);
+}
+
+/* Overlay */
+.news-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 102, 179, 0) 0%,
+    rgba(0, 102, 179, 0.9) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.news-card:hover .news-overlay {
+  opacity: 1;
+}
+
+.share-icon {
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.share-icon:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Content */
 .news-content {
   padding: 25px;
 }
 
 .news-category {
+  display: inline-block;
+  padding: 6px 15px;
   background: #e6f2ff;
   color: #0066b3;
-  padding: 6px 14px;
   border-radius: 20px;
   font-size: 13px;
   font-weight: 600;
+  margin-bottom: 15px;
+  text-transform: uppercase;
 }
 
 .news-title {
-  margin: 15px 0;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
+  color: #222;
+  margin-bottom: 15px;
+  line-height: 1.4;
+  transition: color 0.3s ease;
+}
+
+.news-card:hover .news-title {
+  color: #0066b3;
+}
+
+.news-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #777;
+}
+
+.news-date,
+.news-readtime {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .news-excerpt {
   color: #555;
-  line-height: 1.6;
+  margin-bottom: 20px;
+  line-height: 1.7;
+  font-size: 15px;
 }
 
 .news-footer {
-  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
   border-top: 1px solid #eee;
-  padding-top: 15px;
 }
 
 .news-link {
   color: #0066b3;
-  font-weight: 600;
-  cursor: pointer;
   text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.3s ease;
 }
 
-/* ===== Modal ===== */
+.news-link:hover {
+  gap: 12px;
+}
+
+.news-stats {
+  display: flex;
+  gap: 20px;
+}
+
+.news-stats span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #888;
+  font-size: 14px;
+}
+
+/* Newsletter in News Section */
+    .news-newsletter {
+      background: linear-gradient(135deg, #0066b3 0%, #004d88 100%);
+      color: white;
+      padding: 50px;
+      border-radius: 20px;
+      margin: 70px 0 40px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0, 102, 179, 0.25);
+    }
+
+    .newsletter-content h3 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .newsletter-content p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 500px;
+      margin: 0 auto;
+      gap: 15px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      outline: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .newsletter-btn {
+      padding: 15px 35px;
+      background: white;
+      color: #0066b3;
+      border: none;
+      border-radius: 30px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .newsletter-btn:hover {
+      background: #f0f0f0;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+/* ===============================
+   Hidden Cards & View More
+================================ */
+.news-card.hidden {
+  display: none; /* allow JS to override */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.view-more-container {
+  text-align: center;
+  margin: 60px 0 40px;
+}
+
+.view-more-btn {
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #0066b3, #005099);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 25px rgba(0, 102, 179, 0.25);
+}
+
+.view-more-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 102, 179, 0.35);
+  gap: 15px;
+}
+
+/* ===============================
+   Animations
+================================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===============================
+   Responsive
+================================ */
+@media (max-width: 992px) {
+  .news-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+}
+
+@media (max-width: 480px) {
+  .news-grid { grid-template-columns: 1fr; }
+  .news-content { padding: 20px; }
+}
+
+/* ===============================
+   News Modal (Popup)
+================================ */
 .news-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.6);
+  background: rgba(0,0,0,0.6);
   display: none;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 9999;
 }
 
-.modal-box {
+.news-modal.active {
+  display: flex;
+}
+
+.news-modal-content {
   background: white;
   padding: 30px;
-  max-width: 650px;
-  border-radius: 15px;
+  max-width: 600px;
+  width: 90%;
+  border-radius: 16px;
   position: relative;
+  animation: fadeInUp 0.4s ease;
 }
 
-.modal-box h3 {
-  margin-bottom: 15px;
+.news-modal-content h3 {
+  margin-top: 0;
+  color: #0066b3;
 }
 
-.modal-box p {
+.news-modal-content p {
   line-height: 1.7;
+  color: #444;
+  margin-top: 15px;
 }
 
-.close-modal {
+.news-modal-close {
   position: absolute;
-  top: 12px;
-  right: 15px;
+  top: 15px;
+  right: 18px;
   font-size: 22px;
   cursor: pointer;
+  color: #333;
 }
+
 </style>
 
-<section class="news-section">
-  <div class="container">
-    <div class="news-grid">
-
-<!-- NEWS 1 -->
-<div class="news-card">
-  <div class="news-img">
-    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72">
-  </div>
-  <div class="news-content">
-    <span class="news-category">Innovation</span>
-    <h3 class="news-title">Green Technology Investment Announced</h3>
-    <p class="news-excerpt">Major investment in renewable energy announced.</p>
-    <div class="news-footer">
-      <a class="news-link read-story"
-         data-title="Green Technology Investment Announced"
-         data-full="Paarvedan Foundation has announced a large-scale investment into renewable energy, EV infrastructure, and sustainable innovation across India.">
-        Read Full Story →
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- NEWS 2 -->
-<div class="news-card">
-  <div class="news-img">
-    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978">
-  </div>
-  <div class="news-content">
-    <span class="news-category">Corporate</span>
-    <h3 class="news-title">Customer Satisfaction Ranking</h3>
-    <p class="news-excerpt">Company ranks highest in customer satisfaction.</p>
-    <div class="news-footer">
-      <a class="news-link read-story"
-         data-title="Customer Satisfaction Ranking"
-         data-full="The organization secured the top position for customer satisfaction for the fifth consecutive year.">
-        Read Full Story →
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- NEWS 3 -->
-<div class="news-card">
-  <div class="news-img">
-    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0">
-  </div>
-  <div class="news-content">
-    <span class="news-category">CSR</span>
-    <h3 class="news-title">Digital Education Initiative</h3>
-    <p class="news-excerpt">Digital education for rural students launched.</p>
-    <div class="news-footer">
-      <a class="news-link read-story"
-         data-title="Digital Education Initiative"
-         data-full="The initiative aims to educate over 5 million rural students using digital learning tools.">
-        Read Full Story →
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- NEWS 4 -->
-<div class="news-card">
-  <div class="news-img">
-    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31">
-  </div>
-  <div class="news-content">
-    <span class="news-category">Technology</span>
-    <h3 class="news-title">AI Healthcare Platform</h3>
-    <p class="news-excerpt">AI-based healthcare system launched.</p>
-    <div class="news-footer">
-      <a class="news-link read-story"
-         data-title="AI Healthcare Platform"
-         data-full="An AI-powered healthcare platform designed to improve medical access in emerging markets.">
-        Read Full Story →
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- NEWS 5 -->
-<div class="news-card">
-  <div class="news-img">
-    <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7">
-  </div>
-  <div class="news-content">
-    <span class="news-category">Sustainability</span>
-    <h3 class="news-title">100% Renewable Energy Milestone</h3>
-    <p class="news-excerpt">Renewable energy target achieved.</p>
-    <div class="news-footer">
-      <a class="news-link read-story"
-         data-title="100% Renewable Energy Milestone"
-         data-full="The company achieved 100% renewable energy usage across its operations.">
-        Read Full Story →
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- NEWS 6 -->
-<div class="news-card">
-  <div class="news-img">
-    <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd">
-  </div>
-  <div class="news-content">
-    <span class="news-category">Corporate</span>
-    <h3 class="news-title">Record EV Sales</h3>
-    <p class="news-excerpt">Electric vehicle sales hit record levels.</p>
-    <div class="news-footer">
-      <a class="news-link read-story"
-         data-title="Record EV Sales"
-         data-full="Electric vehicle sales surged by 150% during the last quarter.">
-        Read Full Story →
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- NEWS 7 -->
-<div class="news-card">
-  <div class="news-img">
-    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64">
-  </div>
-  <div class="news-content">
-    <span class="news-category">Innovation</span>
-    <h3 class="news-title">Green Steel Technology</h3>
-    <p class="news-excerpt">Low-emission steel manufacturing process.</p>
-    <div class="news-footer">
-      <a class="news-link read-story"
-         data-title="Green Steel Technology"
-         data-full="A breakthrough steel manufacturing process reducing emissions by 70%.">
-        Read Full Story →
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- NEWS 8 -->
-<div class="news-card">
-  <div class="news-img">
-    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72">
-  </div>
-  <div class="news-content">
-    <span class="news-category">CSR</span>
-    <h3 class="news-title">Water Conservation Project</h3>
-    <p class="news-excerpt">Clean water initiative launched.</p>
-    <div class="news-footer">
-      <a class="news-link read-story"
-         data-title="Water Conservation Project"
-         data-full="A water conservation project launched to support drought-prone villages in Rajasthan.">
-        Read Full Story →
-      </a>
-    </div>
-  </div>
-</div>
-
-    </div>
-  </div>
-</section>
-
-<!-- MODAL -->
-<div class="news-modal" id="newsModal">
-  <div class="modal-box">
-    <span class="close-modal" id="closeModal">&times;</span>
-    <h3 id="modalTitle"></h3>
-    <p id="modalText"></p>
-  </div>
-</div>
-
+<!-- ===== NEWS SECTION JS ===== -->
 <script>
-const modal = document.getElementById("newsModal");
-const modalTitle = document.getElementById("modalTitle");
-const modalText = document.getElementById("modalText");
+document.addEventListener('DOMContentLoaded', function() {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const newsCards = document.querySelectorAll('.news-card');
+  const viewMoreBtn = document.getElementById('view-more-btn');
 
-document.querySelectorAll(".read-story").forEach(link => {
-  link.addEventListener("click", () => {
-    modalTitle.textContent = link.dataset.title;
-    modalText.textContent = link.dataset.full;
-    modal.style.display = "flex";
+  // Filtering news cards
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+
+      const filter = this.getAttribute('data-filter');
+
+      newsCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (filter === 'all' || cardCategory === filter) {
+          card.classList.remove('hidden');
+          card.style.display = 'block';
+        } else {
+          card.classList.add('hidden');
+          card.style.display = 'none';
+        }
+      });
+
+      updateViewMoreButton();
+    });
   });
+
+  // Show 3 hidden cards at a time
+  function updateViewMoreButton() {
+    const hiddenCards = document.querySelectorAll('.news-card.hidden');
+    if (hiddenCards.length > 0) {
+      viewMoreBtn.style.display = 'inline-flex';
+      viewMoreBtn.innerHTML = 'View More News';
+      viewMoreBtn.style.background = 'linear-gradient(135deg, #0066b3, #005099)';
+    } else {
+      viewMoreBtn.style.display = 'none';
+    }
+  }
+
+  if (viewMoreBtn) {
+    viewMoreBtn.addEventListener('click', function() {
+      const hiddenCards = Array.from(document.querySelectorAll('.news-card.hidden'));
+      const nextItems = hiddenCards.slice(0, 3); // show 3 at a time
+
+      nextItems.forEach(card => {
+        card.classList.remove('hidden');
+        card.style.display = 'block';
+      });
+
+      updateViewMoreButton();
+    });
+  }
+
+  // Initialize
+  updateViewMoreButton();
 });
 
-document.getElementById("closeModal").onclick = () => modal.style.display = "none";
-modal.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
+function openNewsModal(title, content) {
+  document.getElementById('modalTitle').innerText = title;
+  document.getElementById('modalContent').innerText = content;
+  document.getElementById('newsModal').classList.add('active');
+}
+
+function closeNewsModal() {
+  document.getElementById('newsModal').classList.remove('active');
+}
+
+/* Close modal when clicking outside */
+document.getElementById('newsModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeNewsModal();
+  }
+});
 </script>
+
+  <section class="section news-section" id="news">
+    <section class="section news-section" id="news">
+    <div class="container">
+      <div class="section-title">
+        <h2>Latest News & Updates</h2>
+        <p>Stay updated with the latest developments from Paarvedan Foundation</p>
+      </div>
+
+      <!-- News Filter -->
+      <div class="news-filter">
+        <button class="filter-btn active" data-filter="all">All News</button>
+        <button class="filter-btn" data-filter="innovation">Innovation</button>
+        <button class="filter-btn" data-filter="corporate">Corporate</button>
+        <button class="filter-btn" data-filter="csr">CSR</button>
+        <button class="filter-btn" data-filter="technology">Technology</button>
+        <button class="filter-btn" data-filter="sustainability">Sustainability</button>
+      </div>
+
+      <div class="news-grid">
+        <!-- News 1 -->
+        <div class="news-card" data-category="innovation">
+          <div class="news-img">
+            <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72" alt="News">
+            <div class="news-overlay">
+              <i class="fas fa-share-alt share-icon"></i>
+            </div>
+          </div>
+          <div class="news-content">
+            <span class="news-category">Innovation</span>
+            <h3 class="news-title">
+              Paarvedan Foundation Announces $90 Billion Investment in Green Technologies
+            </h3>
+            <div class="news-meta">
+              <div class="news-date">
+                <i class="far fa-calendar-alt"></i> March 15, 2024
+              </div>
+              <div class="news-readtime">
+                <i class="far fa-clock"></i> 3 min read
+              </div>
+            </div>
+            <p class="news-excerpt">
+              Paarvedan Foundation has announced a massive investment focused on renewable energy,
+              electric vehicles, and sustainable infrastructure.
+            </p>
+            <div class="news-footer">
+              <a href="javascript:void(0)"
+   class="news-link"
+   onclick="openNewsModal(
+     'Paarvedan Foundation Announces $90 Billion Investment in Green Technologies',
+     'Paarvedan Foundation has committed a historic $90 billion investment to accelerate renewable energy adoption, electric mobility, and sustainable infrastructure projects across India. This initiative aims to significantly reduce carbon emissions and generate long-term environmental impact.'
+   )">
+
+                Read Full Story <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="news-stats">
+                <span><i class="far fa-eye"></i> 2.4K</span>
+                <span><i class="far fa-comment"></i> 45</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- News 2 -->
+<div class="news-card" data-category="corporate">
+  <div class="news-img">
+    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978" alt="TCS Customer Satisfaction">
+    <div class="news-overlay">
+      <i class="fas fa-share-alt share-icon"></i>
+    </div>
+  </div>
+  <div class="news-content">
+    <span class="news-category">Corporate</span>
+    <h3 class="news-title">
+      TCS Ranked #1 in Customer Satisfaction for 5th Consecutive Year
+    </h3>
+    <div class="news-meta">
+      <div class="news-date">
+        <i class="far fa-calendar-alt"></i> March 10, 2024
+      </div>
+      <div class="news-readtime">
+        <i class="far fa-clock"></i> 2 min read
+      </div>
+    </div>
+    <p class="news-excerpt">
+      TCS continues to lead the IT services sector with unmatched customer satisfaction,
+      achieving industry-leading scores in client feedback surveys.
+    </p>
+    <div class="news-footer">
+      <a href="javascript:void(0)"
+   class="news-link"
+   onclick="openNewsModal(
+     'TCS Ranked #1 in Customer Satisfaction for 5th Consecutive Year',
+     'Tata Consultancy Services has once again secured the top position in customer satisfaction rankings. The achievement reflects consistent service quality, innovation, and long-term client trust across global markets.'
+   )">
+
+        Read Full Story <i class="fas fa-arrow-right"></i>
+      </a>
+      <div class="news-stats">
+        <span><i class="far fa-eye"></i> 1.8K</span>
+        <span><i class="far fa-comment"></i> 32</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <!-- News 3 -->
+        <div class="news-card" data-category="csr">
+          <div class="news-img">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0" alt="News">
+            <div class="news-overlay">
+              <i class="fas fa-share-alt share-icon"></i>
+            </div>
+          </div>
+          <div class="news-content">
+            <span class="news-category">CSR</span>
+            <h3 class="news-title">
+              Paarvedan  Trusts Launch Digital Education Initiative for Rural India
+            </h3>
+            <div class="news-meta">
+              <div class="news-date">
+                <i class="far fa-calendar-alt"></i> March 5, 2024
+              </div>
+              <div class="news-readtime">
+                <i class="far fa-clock"></i> 4 min read
+              </div>
+            </div>
+            <p class="news-excerpt">
+              A digital education program aiming to reach 5 million rural students
+              across India.
+            </p>
+            <div class="news-footer">
+              <a href="javascript:void(0)"
+   class="news-link"
+   onclick="openNewsModal(
+     'Paarvedan Trusts Launch Digital Education Initiative for Rural India',
+     'The initiative focuses on providing digital learning tools, trained educators, and internet access to rural students, aiming to bridge the education gap and empower future generations.'
+   )">
+
+                Read Full Story <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="news-stats">
+                <span><i class="far fa-eye"></i> 3.2K</span>
+                <span><i class="far fa-comment"></i> 67</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Hidden News Cards -->
+        <!-- News 4 -->
+        <div class="news-card hidden" data-category="technology">
+          <div class="news-img">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31" alt="TCS IT Services">
+            <div class="news-overlay">
+              <i class="fas fa-share-alt share-icon"></i>
+            </div>
+          </div>
+          <div class="news-content">
+            <span class="news-category">Technology</span>
+            <h3 class="news-title">
+              Paarvedan  Digital Unveils AI-powered Healthcare Platform
+            </h3>
+            <div class="news-meta">
+              <div class="news-date">
+                <i class="far fa-calendar-alt"></i> February 28, 2024
+              </div>
+              <div class="news-readtime">
+                <i class="far fa-clock"></i> 3 min read
+              </div>
+            </div>
+            <p class="news-excerpt">
+              New AI platform set to revolutionize healthcare accessibility across
+              emerging markets.
+            </p>
+            <div class="news-footer">
+              <a href="javascript:void(0)"
+   class="news-link"
+   onclick="openNewsModal(
+     'Paarvedan Digital Unveils AI-powered Healthcare Platform',
+     'The AI-powered platform enhances early diagnosis, remote consultations, and predictive healthcare analytics, improving medical access in underserved regions.'
+   )">
+
+                Read Full Story <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="news-stats">
+                <span><i class="far fa-eye"></i> 2.1K</span>
+                <span><i class="far fa-comment"></i> 89</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- News 5 -->
+        <div class="news-card hidden" data-category="sustainability">
+          <div class="news-img">
+            <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7" alt="News">
+            <div class="news-overlay">
+              <i class="fas fa-share-alt share-icon"></i>
+            </div>
+          </div>
+          <div class="news-content">
+            <span class="news-category">Sustainability</span>
+            <h3 class="news-title">
+              Paarvedan  Power Achieves 100% Renewable Energy Milestone
+            </h3>
+            <div class="news-meta">
+              <div class="news-date">
+                <i class="far fa-calendar-alt"></i> February 22, 2024
+              </div>
+              <div class="news-readtime">
+                <i class="far fa-clock"></i> 2 min read
+              </div>
+            </div>
+            <p class="news-excerpt">
+              Paarvedan  Power becomes India's first integrated power company to achieve
+              complete renewable energy transition.
+            </p>
+            <div class="news-footer">
+              <a href="javascript:void(0)"
+   class="news-link"
+   onclick="openNewsModal(
+     'Paarvedan Power Achieves 100% Renewable Energy Milestone',
+     'By transitioning entirely to renewable energy sources, Paarvedan Power sets a new benchmark for sustainability in India’s power sector.'
+   )">
+
+                Read Full Story <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="news-stats">
+                <span><i class="far fa-eye"></i> 1.5K</span>
+                <span><i class="far fa-comment"></i> 42</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- News 6 -->
+        <div class="news-card hidden" data-category="corporate">
+          <div class="news-img">
+            <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd" alt="News">
+            <div class="news-overlay">
+              <i class="fas fa-share-alt share-icon"></i>
+            </div>
+          </div>
+          <div class="news-content">
+            <span class="news-category">Corporate</span>
+            <h3 class="news-title">
+              Paarvedan  Motors Reports Record Electric Vehicle Sales
+            </h3>
+            <div class="news-meta">
+              <div class="news-date">
+                <i class="far fa-calendar-alt"></i> February 18, 2024
+              </div>
+              <div class="news-readtime">
+                <i class="far fa-clock"></i> 2 min read
+              </div>
+            </div>
+            <p class="news-excerpt">
+              Q4 sales exceed expectations with 150% growth in electric vehicle segment.
+            </p>
+            <div class="news-footer">
+              <a href="javascript:void(0)"
+   class="news-link"
+   onclick="openNewsModal(
+     'Paarvedan Motors Reports Record Electric Vehicle Sales',
+     'Driven by growing consumer demand and improved charging infrastructure, Paarvedan Motors recorded unprecedented growth in electric vehicle sales this quarter.'
+   )">
+
+                Read Full Story <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="news-stats">
+                <span><i class="far fa-eye"></i> 2.8K</span>
+                <span><i class="far fa-comment"></i> 76</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- News 7 -->
+        <div class="news-card hidden" data-category="innovation">
+          <div class="news-img">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64" alt="News">
+            <div class="news-overlay">
+              <i class="fas fa-share-alt share-icon"></i>
+            </div>
+          </div>
+          <div class="news-content">
+            <span class="news-category">Innovation</span>
+            <h3 class="news-title">
+              Paarvedan  Steel Develops Green Steel Manufacturing Process
+            </h3>
+            <div class="news-meta">
+              <div class="news-date">
+                <i class="far fa-calendar-alt"></i> February 15, 2024
+              </div>
+              <div class="news-readtime">
+                <i class="far fa-clock"></i> 4 min read
+              </div>
+            </div>
+            <p class="news-excerpt">
+              Breakthrough technology reduces carbon emissions by 70% in steel production.
+            </p>
+            <div class="news-footer">
+              <a href="javascript:void(0)"
+   class="news-link"
+   onclick="openNewsModal(
+     'Paarvedan Steel Develops Green Steel Manufacturing Process',
+     'The newly developed green steel technology significantly reduces carbon emissions while maintaining production efficiency and quality.'
+   )">
+
+                Read Full Story <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="news-stats">
+                <span><i class="far fa-eye"></i> 1.9K</span>
+                <span><i class="far fa-comment"></i> 54</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- News 8 -->
+        <div class="news-card hidden" data-category="csr">
+          <div class="news-img">
+            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72" alt="TCS Office">
+            <div class="news-overlay">
+              <i class="fas fa-share-alt share-icon"></i>
+            </div>
+          </div>
+          <div class="news-content">
+            <span class="news-category">CSR</span>
+            <h3 class="news-title">
+              Paarvedan Foundation Launches Water Conservation Project in Rajasthan
+            </h3>
+            <div class="news-meta">
+              <div class="news-date">
+                <i class="far fa-calendar-alt"></i> February 10, 2024
+              </div>
+              <div class="news-readtime">
+                <i class="far fa-clock"></i> 3 min read
+              </div>
+            </div>
+            <p class="news-excerpt">
+              Initiative aims to provide clean water to over 100 villages in drought-prone areas.
+            </p>
+            <div class="news-footer">
+              <a href="javascript:void(0)"
+   class="news-link"
+   onclick="openNewsModal(
+     'Paarvedan Foundation Launches Water Conservation Project in Rajasthan',
+     'This large-scale water conservation project focuses on rainwater harvesting and groundwater recharge to support drought-affected villages.'
+   )">
+
+                Read Full Story <i class="fas fa-arrow-right"></i>
+              </a>
+              <div class="news-stats">
+                <span><i class="far fa-eye"></i> 1.3K</span>
+                <span><i class="far fa-comment"></i> 28</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View More Button -->
+      <div class="view-more-container">
+        <button id="view-more-btn" class="view-more-btn">
+          <span>View More News</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+      </div>
+
+      <!-- Newsletter Subscription in News Section -->
+      <div class="news-newsletter">
+        <div class="newsletter-content">
+          <h3>Never Miss an Update</h3>
+          <p>Subscribe to our news alerts and be the first to know about Paarvedan Foundation's latest developments</p>
+          <form class="newsletter-form">
+            <input
+              type="email"
+              class="newsletter-input"
+              placeholder="Enter your email address"
+              required
+            />
+            <button type="submit" class="newsletter-btn">
+              Subscribe <i class="fas fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- ===== NEWS MODAL ===== -->
+<div class="news-modal" id="newsModal">
+  <div class="news-modal-content">
+    <span class="news-modal-close" onclick="closeNewsModal()">×</span>
+    <h3 id="modalTitle"></h3>
+    <p id="modalContent"></p>
+  </div>
+</div>
+  </section>
 
 
     <!-- Contact Section -->
