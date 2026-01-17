@@ -569,104 +569,295 @@
     </section>
 
     <!-- News Section -->
-    <section class="section news-section" id="news">
-      <div class="container">
-        <div class="section-title">
-          <h2>Latest News & Updates</h2>
-          <p>Stay updated with the latest developments from Tata Group</p>
-        </div>
+    <!-- ================= NEWS SECTION ================= -->
 
-        <div class="news-grid">
-          <!-- News 1 -->
-          <div class="news-card">
-            <div class="news-img">
-              <img
-                src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="News 1"
-              />
-            </div>
-            <div class="news-content">
-              <span class="news-category">Innovation</span>
-              <h3 class="news-title">
-                Tata Group Announces $90 Billion Investment in Green
-                Technologies
-              </h3>
-              <div class="news-date">
-                <i class="far fa-calendar-alt"></i> March 15, 2024
-              </div>
-              <p class="news-excerpt">
-                The Tata Group has announced a massive investment plan focused
-                on renewable energy, electric vehicles, and sustainable
-                infrastructure development.
-              </p>
-              <a href="#" class="news-link"
-                >Read More <i class="fas fa-arrow-right"></i
-              ></a>
-            </div>
-          </div>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-          <!-- News 2 -->
-          <div class="news-card">
-            <div class="news-img">
-              <img
-                src="https://images.unsplash.com/photo-1551836026-d5c2c5af78e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="News 2"
-              />
-            </div>
-            <div class="news-content">
-              <span class="news-category">Corporate</span>
-              <h3 class="news-title">
-                TCS Ranked #1 in Customer Satisfaction for 5th Consecutive Year
-              </h3>
-              <div class="news-date">
-                <i class="far fa-calendar-alt"></i> March 10, 2024
-              </div>
-              <p class="news-excerpt">
-                Tata Consultancy Services has been recognized as the top IT
-                services provider in customer satisfaction by independent
-                research firm.
-              </p>
-              <a href="#" class="news-link"
-                >Read More <i class="fas fa-arrow-right"></i
-              ></a>
-            </div>
-          </div>
+<style>
+/* ===== News ===== */
+.news-section {
+  padding: 120px 0;
+  background: #f8f9fa;
+}
 
-          <!-- News 3 -->
-          <div class="news-card">
-            <div class="news-img">
-              <img
-                src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="News 3"
-              />
-            </div>
-            <div class="news-content">
-              <span class="news-category">CSR</span>
-              <h3 class="news-title">
-                Tata Trusts Launch Digital Education Initiative for Rural India
-              </h3>
-              <div class="news-date">
-                <i class="far fa-calendar-alt"></i> March 5, 2024
-              </div>
-              <p class="news-excerpt">
-                Tata Trusts has launched a comprehensive digital education
-                program aiming to reach 5 million students in rural areas across
-                India.
-              </p>
-              <a href="#" class="news-link"
-                >Read More <i class="fas fa-arrow-right"></i
-              ></a>
-            </div>
-          </div>
-        </div>
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
 
-        <div class="text-center">
-          <a href="#" class="btn btn-secondary">
-            <i class="fas fa-newspaper"></i> View All News
-          </a>
-        </div>
-      </div>
-    </section>
+.news-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.news-img img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.news-content {
+  padding: 25px;
+}
+
+.news-category {
+  background: #e6f2ff;
+  color: #0066b3;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.news-title {
+  margin: 15px 0;
+  font-size: 1.25rem;
+}
+
+.news-excerpt {
+  color: #555;
+  line-height: 1.6;
+}
+
+.news-footer {
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+
+.news-link {
+  color: #0066b3;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* ===== Modal ===== */
+.news-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-box {
+  background: white;
+  padding: 30px;
+  max-width: 650px;
+  border-radius: 15px;
+  position: relative;
+}
+
+.modal-box h3 {
+  margin-bottom: 15px;
+}
+
+.modal-box p {
+  line-height: 1.7;
+}
+
+.close-modal {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 22px;
+  cursor: pointer;
+}
+</style>
+
+<section class="news-section">
+  <div class="container">
+    <div class="news-grid">
+
+<!-- NEWS 1 -->
+<div class="news-card">
+  <div class="news-img">
+    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72">
+  </div>
+  <div class="news-content">
+    <span class="news-category">Innovation</span>
+    <h3 class="news-title">Green Technology Investment Announced</h3>
+    <p class="news-excerpt">Major investment in renewable energy announced.</p>
+    <div class="news-footer">
+      <a class="news-link read-story"
+         data-title="Green Technology Investment Announced"
+         data-full="Paarvedan Foundation has announced a large-scale investment into renewable energy, EV infrastructure, and sustainable innovation across India.">
+        Read Full Story →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS 2 -->
+<div class="news-card">
+  <div class="news-img">
+    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978">
+  </div>
+  <div class="news-content">
+    <span class="news-category">Corporate</span>
+    <h3 class="news-title">Customer Satisfaction Ranking</h3>
+    <p class="news-excerpt">Company ranks highest in customer satisfaction.</p>
+    <div class="news-footer">
+      <a class="news-link read-story"
+         data-title="Customer Satisfaction Ranking"
+         data-full="The organization secured the top position for customer satisfaction for the fifth consecutive year.">
+        Read Full Story →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS 3 -->
+<div class="news-card">
+  <div class="news-img">
+    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0">
+  </div>
+  <div class="news-content">
+    <span class="news-category">CSR</span>
+    <h3 class="news-title">Digital Education Initiative</h3>
+    <p class="news-excerpt">Digital education for rural students launched.</p>
+    <div class="news-footer">
+      <a class="news-link read-story"
+         data-title="Digital Education Initiative"
+         data-full="The initiative aims to educate over 5 million rural students using digital learning tools.">
+        Read Full Story →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS 4 -->
+<div class="news-card">
+  <div class="news-img">
+    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31">
+  </div>
+  <div class="news-content">
+    <span class="news-category">Technology</span>
+    <h3 class="news-title">AI Healthcare Platform</h3>
+    <p class="news-excerpt">AI-based healthcare system launched.</p>
+    <div class="news-footer">
+      <a class="news-link read-story"
+         data-title="AI Healthcare Platform"
+         data-full="An AI-powered healthcare platform designed to improve medical access in emerging markets.">
+        Read Full Story →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS 5 -->
+<div class="news-card">
+  <div class="news-img">
+    <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7">
+  </div>
+  <div class="news-content">
+    <span class="news-category">Sustainability</span>
+    <h3 class="news-title">100% Renewable Energy Milestone</h3>
+    <p class="news-excerpt">Renewable energy target achieved.</p>
+    <div class="news-footer">
+      <a class="news-link read-story"
+         data-title="100% Renewable Energy Milestone"
+         data-full="The company achieved 100% renewable energy usage across its operations.">
+        Read Full Story →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS 6 -->
+<div class="news-card">
+  <div class="news-img">
+    <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd">
+  </div>
+  <div class="news-content">
+    <span class="news-category">Corporate</span>
+    <h3 class="news-title">Record EV Sales</h3>
+    <p class="news-excerpt">Electric vehicle sales hit record levels.</p>
+    <div class="news-footer">
+      <a class="news-link read-story"
+         data-title="Record EV Sales"
+         data-full="Electric vehicle sales surged by 150% during the last quarter.">
+        Read Full Story →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS 7 -->
+<div class="news-card">
+  <div class="news-img">
+    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64">
+  </div>
+  <div class="news-content">
+    <span class="news-category">Innovation</span>
+    <h3 class="news-title">Green Steel Technology</h3>
+    <p class="news-excerpt">Low-emission steel manufacturing process.</p>
+    <div class="news-footer">
+      <a class="news-link read-story"
+         data-title="Green Steel Technology"
+         data-full="A breakthrough steel manufacturing process reducing emissions by 70%.">
+        Read Full Story →
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- NEWS 8 -->
+<div class="news-card">
+  <div class="news-img">
+    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72">
+  </div>
+  <div class="news-content">
+    <span class="news-category">CSR</span>
+    <h3 class="news-title">Water Conservation Project</h3>
+    <p class="news-excerpt">Clean water initiative launched.</p>
+    <div class="news-footer">
+      <a class="news-link read-story"
+         data-title="Water Conservation Project"
+         data-full="A water conservation project launched to support drought-prone villages in Rajasthan.">
+        Read Full Story →
+      </a>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="news-modal" id="newsModal">
+  <div class="modal-box">
+    <span class="close-modal" id="closeModal">&times;</span>
+    <h3 id="modalTitle"></h3>
+    <p id="modalText"></p>
+  </div>
+</div>
+
+<script>
+const modal = document.getElementById("newsModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+
+document.querySelectorAll(".read-story").forEach(link => {
+  link.addEventListener("click", () => {
+    modalTitle.textContent = link.dataset.title;
+    modalText.textContent = link.dataset.full;
+    modal.style.display = "flex";
+  });
+});
+
+document.getElementById("closeModal").onclick = () => modal.style.display = "none";
+modal.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
+</script>
+
 
     <!-- Contact Section -->
     <section class="section contact-section" id="contact">
